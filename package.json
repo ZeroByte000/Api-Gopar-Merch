@@ -1,0 +1,19 @@
+{
+  "name": "api-gopar-merch",
+  "version": "1.0.0",
+  "description": "API GoFood merchant untuk login dan cek transaksi",
+  "license": "MIT",
+  "main": "api/login.js",
+  "scripts": {
+    "dev": "node local-dev.js",
+    "build": "node -e \"console.log('No build step')\"",
+    "start": "node local-dev.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZeroByte000/Api-Gopar-Merch"
+  }
+}
