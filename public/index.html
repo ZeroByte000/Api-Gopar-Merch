@@ -155,7 +155,7 @@
 
     <section>
       <h2>1) Login</h2>
-      <pre><code>curl -X POST https://your-vercel-app.vercel.app/api/login \
+      <pre><code>curl -X POST https://api-gopar-merch.vercel.app/api/login \
   -H "content-type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -171,7 +171,7 @@
 
     <section>
       <h2>2) Cek transaksi terbaru</h2>
-      <pre><code>curl -X POST https://your-vercel-app.vercel.app/api/cek-transaksi \
+      <pre><code>curl -X POST https://api-gopar-merch.vercel.app/api/cek-transaksi \
   -H "content-type: application/json" \
   -H "authorization: Bearer eyJhbGciOi..."</code></pre>
 
@@ -205,7 +205,7 @@
 
     <section>
       <h2>3) Create payment (QRIS dinamis)</h2>
-      <pre><code>curl -X POST https://your-vercel-app.vercel.app/api/create-payment \
+      <pre><code>curl -X POST https://api-gopar-merch.vercel.app/api/create-payment \
   -H "content-type: application/json" \
   -H "authorization: Bearer eyJhbGciOi..." \
   -d '{
@@ -215,7 +215,7 @@
       <pre><code>{
   "jumlah": "25500",
   "qris": "000201010212...",
-  "qris_image": "https://your-vercel-app.vercel.app/qris_string=000201010212..."
+  "qris_image": "https://api-gopar-merch.vercel.app/qris_string=000201010212..."
 }</code></pre>
     </section>
 
