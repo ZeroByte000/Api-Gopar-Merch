@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>API GoFood/Gopay Merchant - Dokumentasi</title>
+  <meta name="description"
+    content="Dokumentasi API GoFood Merchant untuk login, cek transaksi terbaru, dan membuat QRIS dinamis." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://api-gopar-merch.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="API GoFood Merchant - Dokumentasi" />
+  <meta property="og:description"
+    content="Panduan penggunaan endpoint login, cek transaksi, dan create payment QRIS dinamis." />
+  <meta property="og:url" content="https://api-gopar-merch.vercel.app/" />
+  <meta property="og:image" content="https://api-gopar-merch.vercel.app/ZeroByte000.png" />
+  <meta property="og:locale" content="id_ID" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="API GoFood Merchant - Dokumentasi" />
+  <meta name="twitter:description" content="Dokumentasi API untuk login, cek transaksi terbaru, dan QRIS dinamis." />
+  <meta name="twitter:image" content="https://api-gopar-merch.vercel.app/ZeroByte000.png" />
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --ink: #1d1d1b;
+      --muted: #6d6256;
+      --card: #fff9f1;
+      --accent: #f28c28;
+      --code: #13110f;
+      --line: #e6dccf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+      color: var(--ink);
+      background: radial-gradient(1200px 800px at 10% 0%, #fff4df, var(--bg));
+    }
+
+    header {
+      padding: 48px 20px 24px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      margin: 0 auto;
+      max-width: 680px;
+      color: var(--muted);
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+    }
+
+    pre {
+      background: var(--code);
+      color: #f7f0e7;
+      padding: 14px;
+      border-radius: 10px;
+      overflow: auto;
+      font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      padding: 10px 12px;
+      background: #fff3e6;
+    }
+
+    .footer {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <span class="badge">API</span>
+    <h1>Dokumentasi API GoFood Merchant</h1>
+    <p>Endpoint untuk login, cek transaksi terbaru, dan membuat QRIS dinamis.</p>
+  </header>
+
+  <div class="wrap">
+    <section class="grid">
+      <div class="card">
+        <h3>POST /api/login</h3>
+        <p>Login menggunakan email dan password untuk mendapatkan access token.</p>
+      </div>
+      <div class="card">
+        <h3>POST /api/cek-transaksi</h3>
+        <p>Ambil 20 transaksi terbaru dengan header Authorization Bearer.</p>
+      </div>
+      <div class="card">
+        <h3>POST /api/create-payment</h3>
+        <p>Ubah QRIS statis menjadi dinamis berdasarkan jumlah.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>1) Login</h2>
+      <pre><code>curl -X POST https://your-vercel-app.vercel.app/api/login \
+  -H "content-type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "your_password"
+  }'</code></pre>
+
+      <pre><code>{
+  "access_token": "eyJhbGciOi...",
+  "refresh_token": "eyJhbGciOi...",
+  "dbl_enabled": true
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>2) Cek transaksi terbaru</h2>
+      <pre><code>curl -X POST https://your-vercel-app.vercel.app/api/cek-transaksi \
+  -H "content-type: application/json" \
+  -H "authorization: Bearer eyJhbGciOi..."</code></pre>
+
+      <pre><code>{
+  "scrapedAt": "2026-01-12T10:00:00.000Z",
+  "dateRange": "today",
+  "totalCount": 20,
+  "apiTotal": 20,
+  "transactions": [
+    {
+      "tanggalWaktu": "2026-01-12T10:40:15Z",
+      "idPesanan": "QRIS-04202601121040153l4zrADm9LID",
+      "idReferensiGopay": "04202601121040153l4zrADm9LID",
+      "tipePesanan": "GoFood",
+      "tipePembayaran": "qris",
+      "penjualanKotor": "Rp 25.000",
+      "jumlah": 25000,
+      "jumlahCents": 2500000,
+      "status": "success",
+      "issuer": "DANA",
+      "merchantId": "G692242439"
+    }
+  ]
+}</code></pre>
+
+      <div class="note">
+        Jika ingin filter jumlah, kirim body <code>{"jumlah":"25.500"}</code>.
+        Jika tidak ditemukan, API akan mengembalikan error "transaksi tidak ditemukan".
+      </div>
+    </section>
+
+    <section>
+      <h2>3) Create payment (QRIS dinamis)</h2>
+      <pre><code>curl -X POST https://your-vercel-app.vercel.app/api/create-payment \
+  -H "content-type: application/json" \
+  -H "authorization: Bearer eyJhbGciOi..." \
+  -d '{
+    "jumlah": "25.500"
+  }'</code></pre>
+
+      <pre><code>{
+  "jumlah": "25500",
+  "qris": "000201010212...",
+  "qris_image": "https://your-vercel-app.vercel.app/qris_string=000201010212..."
+}</code></pre>
+    </section>
+
+    <div class="footer">
+      Dibuat untuk kebutuhan integrasi QRIS GoFood/Gopay Merchant.
+    </div>
+  </div>
+</body>
+
+</html>
